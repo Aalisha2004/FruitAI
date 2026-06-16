@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login | FruitAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="container" style="height: 90vh; display: flex; align-items: center; justify-content: center;">
+        <div class="glass-card" style="width: 100%; max-width: 400px; text-align: center; padding: 3rem;">
+            <h1 style="margin-bottom: 0.5rem;">FruitAI 🍎</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Professional Freshness Detection</p>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div style="background: rgba(255, 61, 0, 0.2); color: #ff3d00; padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+                        {{ messages[0] }}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form action="/login" method="post">
+                <input type="text" name="username" placeholder="Username" required 
+                       style="width: 100%; padding: 12px; margin-bottom: 15px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px;">
+                <input type="password" name="password" placeholder="Password" required 
+                       style="width: 100%; padding: 12px; margin-bottom: 20px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px;">
+                <button type="submit" class="btn" style="width: 100%;">Enter Dashboard</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

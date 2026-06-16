@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Results | FruitAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <nav>
+        <h3>FruitAI <span style="color: var(--accent);">Report</span></h3>
+        <div>
+            <a href="/index" class="btn btn-outline" style="margin-right: 10px;">New Batch</a>
+            <a href="/logout" class="btn btn-danger">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div style="margin: 2rem 0; text-align: center;">
+            <h1 style="font-size: 2.5rem;">Analysis Results</h1>
+        </div>
+
+        <div class="results-grid">
+            {% for r in results %}
+            <div class="fruit-card" style="box-shadow: 0 0 15px {{ r.color }}20;">
+                <img src="data:image/png;base64,{{ r.image }}" class="card-image" alt="Fruit">
+                
+                <div class="badge" style="background: {{ r.color }}; color: #000;">
+                    {{ r.grade }}
+                </div>
+
+                <div class="card-details">
+                    <h3 style="text-transform: capitalize; margin-bottom: 1rem;">{{ r.label }}</h3>
+                    
+                    <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                        <span style="color: var(--text-secondary);">Freshness</span>
+                        <strong style="color: {{ r.color }};">{{ r.freshness }}%</strong>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="background: {{ r.color }}; --w: {{ r.freshness }}%;"></div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                        <span style="color: var(--text-secondary);">AI Confidence</span>
+                        <strong style="color: #38bdf8;">{{ r.conf }}%</strong>
+                    </div>
+                    <div class="progress-track">
+                        <div class="conf-fill" style="--w: {{ r.conf }}%;"></div>
+                    </div>
+
+                    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; margin-top: 5px;">
+                        <span style="color: var(--text-secondary); font-size: 0.9rem;">⏳ Shelf Life: </span>
+                        <span style="color: white; font-weight: bold;">{{ r.days }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
